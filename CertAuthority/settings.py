@@ -1,3 +1,4 @@
+#  coding=utf-8
 """
 Django settings for CertAuthority project.
 
@@ -152,8 +153,16 @@ STATICFILES_DIRS = [
 
 CONSTANCE_BACKEND = 'constance.backends.database.DatabaseBackend'
 
+CONSTANCE_ADDITIONAL_FIELDS = {
+    'ca_type_select': ['django.forms.fields.ChoiceField', {
+        'widget': 'django.forms.Select',
+        'choices': (('root', "Головной УЦ"), ('second', "Подчиненный"), ("mixed", "Смешанный"))
+    }],
+}
+
 CONSTANCE_CONFIG = {
     'SITE_NAME': ('My Title', 'Website title'),
+    'CA_TYPE': ('mixed', 'type Certification Authority', 'ca_type_select'),
     'CA_PATH': (BASE_DIR, 'Path to CA Directory',str),
 
 
@@ -163,6 +172,6 @@ CONSTANCE_CONFIG = {
 }
 
 CONSTANCE_CONFIG_FIELDSETS = {
-    'General Options': ('SITE_NAME', 'SITE_DESCRIPTION', 'CA_PATH'),
+    'General Options': ('SITE_NAME', 'SITE_DESCRIPTION', 'CA_PATH', 'CA_TYPE'),
     'Theme Options': ('THEME',),
 }

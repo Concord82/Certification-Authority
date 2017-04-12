@@ -3,27 +3,31 @@ from django.utils.translation import ugettext_lazy as _
 from django import forms
 from CertAuthority.settings import BASE_DIR
 from constance import config
-len_bits = (
-    (1, '1024'),
-    (2, '2048'),
-    (4, '4096')
-)
 
-countrylist = (
-    ('RU', 'Россия'),
-    ('BY', 'Belarus'),
-    ('UA', 'Ukraine'),
-    ('GB', 'United Kingdom'),
-    ('US', 'United States of America')
-)
-
-hashalg = (
-    (1, 'sha256'),
-    (2, 'sha384'),
-    (3, 'sha512')
-)
+class TypeCA(forms.Form):
+    type_ca = forms.ChoiceField(
+        label='Режим работы УЦ',
+        widget=forms.RadioSelect,
+        choices=(
+            ('root', 'Головной УЦ'),
+            ('second', 'Подчиненный'),
+            ('mixed', 'Смешанный')
+        ),
+        initial ='mixed',
+        help_text='Установка режимы работы Удостоверяющего центра'
+    )
 
 class CertParams(forms.Form):
+    hashalg = (
+        (1, 'sha256'),
+        (2, 'sha384'),
+        (3, 'sha512')
+    )
+    len_bits = (
+        (1, '1024'),
+        (2, '2048'),
+        (4, '4096')
+    )
     capath = forms.CharField(label=_(u'Directory Name'),max_length=255, initial=config.CA_PATH, help_text='Путь для файлов УЦ')
     year = forms.IntegerField(label=_(u'Validity'), min_value=5, max_value=50, initial=20)
     algoritm = forms.ChoiceField(label=_(u'Hash Algoritm'), choices=hashalg, initial=1)
@@ -42,6 +46,7 @@ class CertParams(forms.Form):
         return ca_dir
 
     def clean(self):
+
         cleaned_data = super(CertParams, self).clean()
         pass1 = cleaned_data.get('password')
         pass2 = cleaned_data.get('password2')
@@ -90,6 +95,13 @@ class CertParams(forms.Form):
 
 
 class CertForm(forms.Form):
+    countrylist = (
+        ('RU', 'Россия'),
+        ('BY', 'Belarus'),
+        ('UA', 'Ukraine'),
+        ('GB', 'United Kingdom'),
+        ('US', 'United States of America')
+        )
     name = forms.CharField(label=_(u'Certification Authority Name'), max_length=100)
     country = forms.ChoiceField(label=_(u'Country'), choices=countrylist)
     state = forms.CharField(label=_(u'State'), max_length='100')

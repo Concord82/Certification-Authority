@@ -1,0 +1,27 @@
+{% extends "__install.html" %}
+{% load staticfiles i18n %}
+{% load widget_tweaks %}
+
+{% block mainmenu %}
+
+{% endblock %}
+
+{% block title %}{% trans "Set Type CA" %} | {{ block.super }}{% endblock %}
+
+{% block left_sidebar %}
+    <ul>
+        <li class="text-primary">Тип Удостоверяющего центра</li>
+        <li>Параметры развертывания.</li>
+        <li>Корневой Сертификат</li>
+    </ul>
+{% endblock %}
+
+{% block install_form %}
+    <form action="/config/type/" method="POST" >
+        {% csrf_token %}
+        {{ cert_form.as_table }}
+        <input type="submit" class="btn btn-primary col-xs-2 col-xs-offset-10" value="{% trans "Next"%}">
+
+
+    </form>
+{% endblock %}

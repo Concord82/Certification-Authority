@@ -16,6 +16,11 @@ def home(request):
         cert_form = CertForm
     return render(request, "config.html", {'cert_form': cert_form})
 
+def typeca(request):
+    from .forms import TypeCA
+    cert_form = TypeCA
+    return render(request, "set_type.html", {'cert_form': cert_form})
+
 
 def create(request):
     from .forms import CertParams
