@@ -133,11 +133,8 @@ LOCALE_PATHS = [
 ]
 
 TIME_ZONE = 'Asia/Tomsk'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -166,4 +163,3 @@ CONSTANCE_CONFIG_FIELDSETS = {
     'General Options': ('SITE_NAME', 'SITE_DESCRIPTION', 'CA_PATH'),
     'Theme Options': ('THEME',),
 }
-
