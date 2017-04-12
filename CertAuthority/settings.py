@@ -166,3 +166,4 @@ CONSTANCE_CONFIG_FIELDSETS = {
     'General Options': ('SITE_NAME', 'SITE_DESCRIPTION', 'CA_PATH'),
     'Theme Options': ('THEME',),
 }
+
