@@ -5,3 +5,4 @@ from .models import Cert_Parameters
 
 class CertParamForm(forms.ModelForm):
     nsCertType = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Cert_Parameters.NS_CERT_TYPE)
+    keyUsage = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple, choices=Cert_Parameters.KEY_USAGE)
