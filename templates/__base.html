@@ -1,0 +1,36 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}{{ config.SITE_NAME }}{% endblock %}
+    </title>
+    {% block cssstyle %}
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css"%}" >
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap-theme.css"%}" >
+    <!-- My CSS Style customisation-->
+    <link rel="stylesheet" type="text/css" href="{% static "css/certauth.css"%}" >
+    {% endblock %}
+</head>
+<body>
+    {% block mainmenu %}
+    {% include "_menu.html" %}
+    {% endblock %}
+    <div class="container">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% include "_footer.html" %}
+    {% block jsfile %}
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static "js/jquery-git.min.js" %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static "js/bootstrap.min.js" %}"></script>
+
+    {% endblock %}
+</body>
+</html>

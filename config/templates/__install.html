@@ -1,0 +1,27 @@
+{% extends "__base.html" %}
+{% load staticfiles i18n %}
+
+{% block mainmenu %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+     <div class="row">
+        <h3 class="text-center"> Установка удостоверяющего центра </h3>
+        <br />
+        <br />
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            {% block left_sidebar %}
+
+            {% endblock %}
+        </div>
+        <div class="col-xs-9">
+            {% block install_form %}
+
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}

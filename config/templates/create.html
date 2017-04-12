@@ -1,0 +1,86 @@
+{% extends "__install.html" %}
+{% load staticfiles i18n %}
+{% load widget_tweaks %}
+
+{% block mainmenu %}
+
+{% endblock %}
+
+{% block title %}{% trans "Config CA" %} | {{ block.super }}{% endblock %}
+
+{% block left_sidebar %}
+    <ul>
+        <li class="text-primary">Параметры развертывания.</li>
+        <li>Корневой Сертификат</li>
+    </ul>
+{% endblock %}
+
+{% block install_form %}
+    <div class="col-xs-8 col-xs-offset-1">
+        <form action="/config/create_conf" method="POST" >
+            {% csrf_token %}
+            {% if cert_form.non_field_errors %}
+                <ul>
+                    {% for non_field_error  in cert_form.non_field_errors %}
+                        <li>{{ non_field_error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <div class="form-group {% if cert_form.capath.errors %}has-error{% endif %}">
+                <label class="control-label">{{ cert_form.capath.label}}</label>
+                {{ cert_form.capath|add_class:"form-control" }}
+                <span class="help-block">
+                    {% if cert_form.capath.errors %}
+                        {{ cert_form.capath.errors }}
+                    {% else %}
+                        {{ cert_form.capath.help_text }}
+                    {% endif %}
+                </span>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-xs-3 {% if cert_form.year.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ cert_form.year.label}}</label>
+                    {{ cert_form.year|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-xs-3 col-xs-offset-3 {% if cert_form.algoritm.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ cert_form.algoritm.label}}</label>
+                    {{ cert_form.algoritm|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-xs-3 {% if cert_form.bits.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ cert_form.bits.label}}</label>
+                        {{ cert_form.bits|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-xs-6 {% if cert_form.password.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ cert_form.password.label}}</label>
+                    {{ cert_form.password|add_class:"form-control" }}
+                    <span class="help-block">
+                    {% if cert_form.password.errors %}
+                        {{ cert_form.password.errors }}
+                    {% else %}
+                        {{ cert_form.password.help_text }}
+                    {% endif %}
+                    </span>
+                </div>
+                <div class="form-group col-xs-6 {% if cert_form.password2.errors %}has-error{% endif %}">
+                    <label class="control-label">{{ cert_form.password2.label}}</label>
+                    {{ cert_form.password2|add_class:"form-control" }}
+                    <span class="help-block">
+                    {% if cert_form.password2.errors %}
+                        {{ cert_form.password2.errors }}
+                    {% else %}
+                        {{ cert_form.password2.help_text }}
+                    {% endif %}
+                    </span>
+                </div>
+            </div>
+
+
+            <input type="submit" class="btn btn-primary col-xs-2 col-xs-offset-10" value="{% trans "Next"%}">
+        </form>
+    </div>
+{% endblock %}
